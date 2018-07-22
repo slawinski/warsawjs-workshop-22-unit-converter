@@ -1,16 +1,23 @@
 'use strict';
 
+// const mock = require('mock-require');
+
+// mock('request-promise', async () => ({
+//   table: 'A',
+//   currency: 'dolar amerykański',
+//   code: 'USD',
+//   rates: [
+//     {
+//       no: '1/A/NBP/2012',
+//       effectiveDate: '2012-01-02',
+//       mid: 0.4454,
+//     },
+//   ],
+// }));
+
 const { currency } = require('../../converters/currency');
 
-const example = x => new Promise(resolve => setTimeout(() => resolve(x + 1), 100));
-
-describe('example', () => {
-
-  it('should work', async () => {
-              expect(await example(10)).toBe(11);  
-  });
-
-});
-
-describe('currency converter', () => {
+describe('currency converter', async () => {
+  const response = await currency(1, 'USD', 'PLN');
+  expect(response).toBe(3.4546);
 });
